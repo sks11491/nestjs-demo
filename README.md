@@ -20,5 +20,3 @@ To get started with the demo, follow these steps:
 // run below doecker command as below
 $ docker-compose up -d
 ```
-
-```
