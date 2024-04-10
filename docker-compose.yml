@@ -1,0 +1,30 @@
+services:
+  assessment_nes:
+    depends_on:
+      - mysql_db
+    build: ./assessment
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./assessment/src:/usr/src/app/src
+    command: npm run start:dev
+    extra_hosts:
+      - "dockerhost:172.22.0.2"
+    environment:
+      - PORT=3001
+    networks:
+      - nesjs-network
+  mysql_db:
+    image: mysql:5.7
+    ports:
+      - "3307:3307"
+    networks:
+      - nesjs-network
+    environment:
+      - MYSQL_ROOT_PASSWORD=root_password_123
+      - MYSQL_DATABASE=nestjs_db
+      - MYSQL_USER=testuser
+      - MYSQL_PASSWORD=testuser123
+      - MYSQL_TCP_PORT=3307
+networks:
+  nesjs-network:
